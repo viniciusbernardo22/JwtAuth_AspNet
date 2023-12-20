@@ -9,17 +9,11 @@ namespace JwtAspNet
             var builder = WebApplication.CreateBuilder(args);
             ConfigureServices(builder);
 
-
             var app = builder.Build();
 
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
+            ConfigureApp(app);
 
             app.MapControllers();
-
             app.Run();
         }
 
@@ -29,6 +23,15 @@ namespace JwtAspNet
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
             builder.Services.AddControllers();
+        }
+
+        static void ConfigureApp(IApplicationBuilder app) 
+        {
+            app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
         }
     }
 }
