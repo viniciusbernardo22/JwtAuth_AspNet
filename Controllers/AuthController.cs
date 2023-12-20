@@ -1,14 +1,15 @@
-﻿using JwtAspNet.Models;
+﻿using System.Security.Claims;
+using JwtAspNet.Models;
 using JwtAspNet.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Http;
 
 namespace JwtAspNet.Controllers
 {
     [ApiController]
     [Route("Auth")]
-    public class AuthController
+    public class AuthController : Controller
     {
         [HttpGet("login")]
         public string Login(AuthService service)
@@ -27,11 +28,20 @@ namespace JwtAspNet.Controllers
             return token;
         }
 
-        [HttpGet("restrict")]
+        [HttpGet("whoiam")]
         [Authorize]
-        public string Restrict()
+        public object Restrict()
         {
-            return "Ok";
+            var userIdClaim = User.FindFirst(x => x.Type == "Id").Value;
+
+            return new
+            {
+                id = User.FindFirst(x => x.Type == "Id").Value,
+                name = User.FindFirst(x => x.Type == ClaimTypes.Name).Value,
+                email = User.FindFirst(x => x.Type == ClaimTypes.Email).Value,
+                givenName = User.FindFirst(x => x.Type == ClaimTypes.GivenName).Value,
+                image = User.FindFirst(x => x.Type == "Image").Value,
+            };
         }
 
         [HttpGet("admin")]

@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+
 namespace JwtAspNet.Services
 {
     public class AuthService
@@ -35,18 +36,18 @@ namespace JwtAspNet.Services
    
         private static ClaimsIdentity GenerateClaims(User user)
         {
-            ClaimsIdentity CI = new ();
+            ClaimsIdentity ci = new ();
 
-            CI.AddClaim(new Claim("Id", user.Id.ToString()));
-            CI.AddClaim(new Claim(ClaimTypes.Name, user.Email));
-            CI.AddClaim(new Claim(ClaimTypes.Email, user.Email));
-            CI.AddClaim(new Claim(ClaimTypes.GivenName, user.Name));
-            CI.AddClaim(new Claim("Image", user.Image));
+            ci.AddClaim(new Claim("id", user.Id.ToString()));
+            ci.AddClaim(new Claim(ClaimTypes.Name, user.Email));
+            ci.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+            ci.AddClaim(new Claim(ClaimTypes.GivenName, user.Name));
+            ci.AddClaim(new Claim("image", user.Image));
 
             foreach (var role in user.Roles)
-                CI.AddClaim(new Claim(ClaimTypes.Role, role));
+                ci.AddClaim(new Claim(ClaimTypes.Role, role));
             
-            return CI;
+            return ci;
         }
     }
 }
