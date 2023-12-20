@@ -7,9 +7,8 @@ namespace JwtAspNet
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddTransient<AuthService>();
+            ConfigureServices(builder);
 
-            builder.Services.AddControllers();
 
             var app = builder.Build();
 
@@ -22,6 +21,14 @@ namespace JwtAspNet
             app.MapControllers();
 
             app.Run();
+        }
+
+         static void ConfigureServices(WebApplicationBuilder builder)
+        {
+            builder.Services.AddTransient<AuthService>();
+            builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization();
+            builder.Services.AddControllers();
         }
     }
 }
