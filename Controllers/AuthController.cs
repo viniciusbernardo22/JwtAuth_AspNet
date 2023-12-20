@@ -20,7 +20,7 @@ namespace JwtAspNet.Controllers
                 Image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH9Hy0DRPnkdxOSN89rOI7IdevMB76D3pUhDHcz9d7KA&s",
                 Roles: new[]
                 {
-                    "admin", "user", "student"
+                     "user", "student"
                 });
 
             var token = service.CreateToken(user);
@@ -35,10 +35,10 @@ namespace JwtAspNet.Controllers
         }
 
         [HttpGet("admin")]
-        [Authorize(Policy = "author")]
+        [Authorize(Policy = "admin")]
         public string Admin()
         {
-            return "author";
+            return "admin";
         }
     }
 }

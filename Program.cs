@@ -55,7 +55,7 @@ namespace JwtAspNet
             });
             builder.Services.AddAuthorization(x =>
             {
-                x.AddPolicy("author", p => p.RequireRole("author"));
+                x.AddPolicy("admin", p => p.RequireRole("admin"));
             });
         }
     }
