@@ -1,3 +1,5 @@
+using JwtAspNet.Services;
+
 namespace JwtAspNet
 {
     public class Program
@@ -5,6 +7,7 @@ namespace JwtAspNet
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddTransient<AuthService>();
 
             builder.Services.AddControllers();
 
