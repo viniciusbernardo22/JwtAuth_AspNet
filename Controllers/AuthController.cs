@@ -30,10 +30,8 @@ namespace JwtAspNet.Controllers
 
         [HttpGet("whoiam")]
         [Authorize]
-        public object Restrict()
+        public object WhoIAM()
         {
-            var userIdClaim = User.FindFirst(x => x.Type == "Id").Value;
-
             return new
             {
                 id = User.FindFirst(x => x.Type == "Id").Value,
